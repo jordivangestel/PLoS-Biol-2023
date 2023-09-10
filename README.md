@@ -6,5 +6,5 @@ Contact information: jordivangestel@gmail.com
 # Overview of included code
 1. Folder "MATLAB script": Matlab GUI for analyzing colony images <br />
 2. Folder "R script": R script for analyzing gene expression changes <br />
-Please see README.txt files in both folder for description on how to run the associated scripts
+Please see README.txt files in both folders for complete description on how to run the associated scripts
 

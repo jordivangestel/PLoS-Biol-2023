@@ -1,0 +1,111 @@
+van Gestel et al., 2023 PLoS Biology
+Colony analysis MATLAB scripts [for PC]
+jordivangestel@gmail.com
+
+***Description***
+The folder contains a matlab script with a simple General User Interface (GUI) that can be used to rapidly detect colony boundaries in a large number of images with Petri-dishes, where the colony is grown in center. The Matlab script (a) detects the Petri-dish, (b) segments the colony, (c) draws an outline around the colony with boundary points, (d) optimizes this outline, (e) outputs data coordinates and summary data of colony boundaries. The matlab script contains a simple GUI that makes it possible to click through images and optimize parameter settings for image analysis.
+
+***Folder structure***
+M Functions > All matlab functions necessary to run CA_GUI
+M Images > Images of petridishes that need to be analyzed in JPG-format (see example "A7R1.JPG")
+M Load > Matlab data file that can be loaded upon started [Can be found in M Output upon saving analysis]
+M Output > Data output, outlines and parameter files (see below), as well as Matlab date file that can be used to load data in CA_GUI.
+
+***Starting up GUI***
+(1) Save all images for analysis in "M Images" in JPG format
+(2) Open matlab and set workspace to "MATLAB script"
+(3) Run GUI by typing "CA_GUI" in Command Window.
+(4) Now a GUI will open with the first image being displayed, one can click through the images and start analysis. See the description below regarding the parameter settings as well as the meaning of each button.
+
+***Parameter settings and buttons***
+<Images> Detection of Petri-dish within JPG-image
+(A) x plate = x coordinate [in # of pixels] of center of plate in image
+(B) y plate = y coordinate [in # of pixels] of center of plate in image
+(C) radius plate = radius of plate [in # of pixels]
+(C) find center = threshold used to segment Petri-dish from dark background
+(D) x colony = x coordinate [in # of pixels] of center of colony
+(E) y colony = y coordinate [in # of pixels] of center of colony
+(G) radius = radius within plate for which colony segmentation will run
+Button "Show": Shows output of Petri-dish segmentation to show accuracy
+Button "Find": Shows the sequential procedure of founding Petri-dish outline to optimize parameter settings
+
+<Segmentation> Segmentation of colony
+(H) lower = Lower pixel value that is used to rescale pixel values
+(I) upper = Highest pixel value that is used to rescale pixel values
+(J) gamma = Gamma-conversion used in rescaling pixel values
+(K) threshold = threshold used to conver grey image to binary image
+(L) dilate 1 = size [in # of pixels] of first dilation step
+(M) fill = fill wholes in binary images that are smaller than x pixels
+(N) erode = size [in # of pixels] of erosion step of binary image
+(O) dilate 2 = size [in # of pixels] of second dilation step
+Button "Histogram" = Show histogram distribution of pixel values, to optimize parameters
+Button "Show" = Show colony outline that result from image segmentation 
+
+<Boundaries> Draw line as a list of points along colony boudary, whose positions can be analyzed by fitting sigmoidal line with respect to colony radius
+(P) point = Distance [in # of pixels] between points along colony boundary
+(Q) sigmoidal = Length of perpendicular axis [with respect to boundary] at boundary point along which sigmoidal analysis for refinement is performed
+Button "Outline" = Draw outline along colony boudnary
+Button "Refine" = Refine all points along outline by fitting sigmoidal curve to pixel values perpendicular to each point along colony outline
+Buttons below set range of boundary points
+Button "Refine" = Refine points along outline
+Button "Delete" = Delete points along outline
+Note that index of closest boundary point is displayed above "Delete" button after clicking on the image
+
+<Comparison> Compare outline of subsequent images and rotate them such that they match up most perfects [this functionality can be used to compare colonies in time series]
+(R) degree step = Precision by which colony boundaries will be rotated to find the best match between subsequent images
+(S) bins = Bins in histograms that is used for colony boundary comparison
+Button "Comparison" = Compare and adjust outline for multiple images
+Button "Show" = Show overlay of bondaries across images
+
+<Buttons below image> Manually adjust points along colony radius
+By activating any of the below buttons one can manually adjust a boundary point by clicking on the images. The closest boundary point will be manipulated.
+Button "Show" = Show pixel values perpendicular to boundary outline for closest boundary point
+Button "Refine" = Refine location of closest boundary point based on fitting sigmoidal curve on pixel values
+Button "Move" = Move boundary point
+Button "Add" = Add boundary point
+Button "Delete" = Remove boundary point
+Note that index of closest boundary point is displayed ["Current"] in <Boundaries> after clicking on the image
+
+<Buttons above image> Process image
+Button "Load" = Load results from previous image analysis [important this requires a Matlab data file "M.mat" in "M Load". The "M.mat" file is automatically outputted in "M Output" whenever saving a current analysis. In other words, you can always reload a previous analysis as long as the corresponding JPG-images are available in "M Images"]
+Button "Save" = Save current state of image analysis
+Button "Previous" = Go to previous image
+Button "Next" = Go to next image
+Button "All" = Analyze all images using default settings, thereby detecting Petri-dish, segmenting colony, and drawing colony outline
+Button "Delete" = Delete image [this image will be ignored for the purpose of the colony outline analysis, but will still be visible in "M Images"]
+Button "Save outline" = Save information from colony outline, data files will be available in "M Output". See description of those files below.
+
+<Buttons on the right> Center or re-center colony
+Button "Center" = Find center of colony
+Button "Re-center" = Re-center colony manually, click on center in image and then click "re-center" to manually adjust center.
+Please note that pixel coordinates and intensity are displayed above the "Center" button when clicking on the images
+
+<Check boxes in lower left corner> Adjust image display
+Checkbox "Centralization" = Display center of colony
+Checkbox "Segmentation" = Display colony boundary (blue) based on segmentation
+Checkbox "Points" = Display points (red) along refined colony boundary (green)
+Checkbox "Lines" = Display perpendicular lines used to refine location of boundary points (yellow), using sigmoidal fitting function [requires Matlab Statistics Toolbox]
+
+***Default parameter settings***
+If necessary, the default parameters settings can be adjusted in "CA_startup.m" in "M functions" folder
+
+***Output data***
+Output data is used for all subsequent analysis. The output data files contain the following information
+
+LINE.txt
+Ax = Absolute x coordinate of colony boundary [in # of pixels]
+Ay = Absolute y coordinate of colony boundary [in # of pixels]
+Bx = Relative x coordinate of colony boundary [in # of pixels] with respect to colony center
+By = Relative y coordinate of colony boundary [in # of pixels] with respect to colony center
+Cx = Relative x coordinate of colony boundary [relative to Petri-dish radius] with respect to colony center
+Cy = Relative y coordinate of colony boundary [relative to Petri-dish radius] with respect to colony center
+
+PAR.txt
+FILE = file name
+A = x coordinate [in # of pixels] of center of plate in image
+B = y coordinate [in # of pixels] of center of plate in image
+C = radius of plate [in # of pixels]
+D = x coordinate [in # of pixels] of center of colony
+F = y coordinate [in # of pixels] of center of colony
+ 
+

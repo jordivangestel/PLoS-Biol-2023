@@ -1,0 +1,12 @@
+van Gestel et al., 2023 PLoS Biology
+Data analysis in R.
+jordivangestel@gmail.com
+
+***Overview of files***
+Analysis.r = R script to analyze expression changes in any of the genes in B. subtilis (lineage 1 and 2)
+ANNOTATION_ANCESTOR.txt = Annotation of ancestral genome of B. subtilis strain used in this study
+ANNOTATION_REFERENCE.txt = Annotation of reference genome of B. subtilis 168
+BBH.txt = Bi-directional best blast hits between ancestral and reference genome
+CONDITIONS = Conditions associated with count matrix
+COUNT_S5DATA = Normalized count data as given in S5 Data
+GENES = List of genes associated with count matrix

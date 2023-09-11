@@ -6,7 +6,6 @@ rm(list=ls())
 library(lmtest)
 
 PATH  		<- getwd()
-PATH  		<- "C:\\Users\\vangestel\\Dropbox\\1. Project Zürich\\2016.06.24 Experiments\\2020.05.11 Manuscript\\2023.09.04 Revision2\\Uploading data\\Github information\\R script\\"
 ANCESTOR_LABEL 	<- read.delim(paste0(PATH,"ANNOTATION_ANCESTOR.txt"),header=TRUE,sep="\t")	# Annotation of ancestral genome
 REFERENCE_LABEL 	<- read.delim(paste0(PATH,"ANNOTATION_REFERENCE.txt"),header=TRUE,sep="\t")	# Annotation of reference genome in B. subtilis 168
 COUNT			<- read.table(paste0(PATH,"COUNT_S5DATA.txt"),header=FALSE,sep="\t")		# Count data as shown in S5 Data
